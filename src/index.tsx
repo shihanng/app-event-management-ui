@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { GlobalStyles } from "twin.macro";
 import App from "./App";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import "tailwindcss/dist/base.min.css";
 
