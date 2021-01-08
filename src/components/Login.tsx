@@ -7,12 +7,12 @@ interface Params {
   password?: string;
 }
 
-interface Response {
+interface Result {
   auth_token?: string;
   error?: string;
 }
 
-async function login(data: Params): Promise<Response> {
+async function login(data: Params): Promise<Result> {
   let auth_token;
   let error;
 
