@@ -14,6 +14,7 @@
     "@types/react-dom": "^16.9.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "tailwindcss": "^2.0.2",
     "twin.macro": "^2.0.8",
@@ -48,5 +49,8 @@
     "twin": {
       "config": "src/tailwind.config.js"
     }
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.7"
   }
 }

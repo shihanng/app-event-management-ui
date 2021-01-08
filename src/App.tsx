@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import tw from "twin.macro";
+import "./App.css";
+import logo from "./logo.svg";
 
 function App() {
   return (
@@ -23,6 +24,12 @@ function App() {
         </a>
         <input tw="bg-black" />
       </header>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/auth" render={() => <div>auth</div>} />
+          <Route path="/" render={() => <div>root</div>} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
