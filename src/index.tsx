@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { GlobalStyles } from "twin.macro";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "tailwindcss/dist/base.min.css";
 
 ReactDOM.render(
   <React.StrictMode>

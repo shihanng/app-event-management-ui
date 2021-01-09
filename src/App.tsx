@@ -1,14 +1,15 @@
 /** @jsxImportSource @emotion/react */
 
+import { Global } from "@emotion/react";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import tw from "twin.macro";
+import tw, { css } from "twin.macro";
 import Event from "./components/Event";
 import Header from "./components/Header";
 import Login from "./components/Login";
-import Signup from "./components/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Signup from "./components/Signup";
 import useToken from "./hooks/useToken";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,13 @@ function App() {
 
   return (
     <Div>
+      <Global
+        styles={css`
+          a {
+            ${tw`text-purple-400 hover:underline hover:text-purple-800`}
+          }
+        `}
+      />
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <Header token={token} setToken={setToken}></Header>
