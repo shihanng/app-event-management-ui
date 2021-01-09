@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import React from "react";
 import { useQuery } from "react-query";
 import tw from "twin.macro";
+import AddEvent from "./AddEvent";
 import { Deregister, Register } from "./Register";
 
 interface Props {
@@ -95,6 +96,7 @@ const Event: React.FC<Props> = ({ token }) => {
 
   return dataEvents && dataUserEvents ? (
     <div>
+      <AddEvent token={token} />
       {dataEvents.map((d) => {
         return (
           <div key={d.uuid}>
