@@ -9,22 +9,21 @@ interface Props {
   token: string;
 }
 
-interface EventItemProps {
-  name: string;
-  uuid: string;
-  location: string;
-  start_time: string;
-  end_time: string;
+interface EventItemProps extends EventResponse {
+  isRegistered: boolean;
 }
 
 const EventItem: React.FC<EventItemProps> = (props) => {
-  const { uuid, location, name, start_time, end_time } = props;
+  const { location, name, start_time, end_time, isRegistered } = props;
 
   const Div = tw.div`mb-3 flex flex-row`;
   const TimeDiv = tw.div`w-9 font-thin text-sm inline-block`;
 
   return (
-    <Div key={uuid}>
+    <Div>
+      <div tw="w-16 text-sm mr-5 justify-center flex flex-col">
+        {isRegistered ? "Unregister" : "Register"}
+      </div>
       <div tw="text-sm mr-5 justify-center flex flex-col">
         <div>
           <TimeDiv>Start </TimeDiv>
@@ -44,8 +43,12 @@ const EventItem: React.FC<EventItemProps> = (props) => {
   );
 };
 
-interface Data {
-  events: EventItemProps[];
+interface EventResponse {
+  name: string;
+  uuid: string;
+  location: string;
+  start_time: string;
+  end_time: string;
 }
 
 function listEvent(token: string) {
@@ -53,22 +56,40 @@ function listEvent(token: string) {
     headers: { Authorization: `Token ${token}` },
   };
 
-  return async function (): Promise<Data> {
+  return async function (): Promise<EventResponse[]> {
     const response = await axios.get("/events/", config);
-    const events: EventItemProps[] = response.data.map(
-      (e: EventItemProps) => e
-    );
-    return { events };
+    const events: EventResponse[] = response.data.map((e: EventItemProps) => e);
+    return events;
+  };
+}
+
+function listUserEvent(token: string) {
+  const config = {
+    headers: { Authorization: `Token ${token}` },
+  };
+
+  return async function (): Promise<string[]> {
+    const response = await axios.get("/events/me/", config);
+    const uuids: string[] = response.data.map((e: EventItemProps) => e.uuid);
+    return uuids;
   };
 }
 
 const Event: React.FC<Props> = ({ token }) => {
-  const { data } = useQuery("events", listEvent(token));
+  const { data: dataEvents } = useQuery(["events", token], listEvent(token));
+  const { data: dataUserEvents } = useQuery(
+    ["user_events", token],
+    listUserEvent(token)
+  );
 
-  return data ? (
+  return dataEvents && dataUserEvents ? (
     <div>
-      {data.events.map((d) => {
-        return <EventItem {...d} />;
+      {dataEvents.map((d) => {
+        return (
+          <div key={d.uuid}>
+            <EventItem isRegistered={dataUserEvents.includes(d.uuid)} {...d} />
+          </div>
+        );
       })}
     </div>
   ) : null;
