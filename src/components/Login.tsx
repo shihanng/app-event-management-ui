@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import { useHistory } from "react-router-dom";
 import Button from "./Button";
 
 interface Params {
@@ -35,6 +36,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [error, setError] = useState<string>();
+  const history = useHistory();
 
   const mutation = useMutation(login);
 
@@ -45,6 +47,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
       {
         onSuccess: (data, _variables, _context) => {
           data.auth_token ? setToken(data.auth_token) : setError(data.error);
+          history.push("/");
         },
       }
     );
