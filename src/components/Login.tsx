@@ -14,21 +14,22 @@ interface Params {
 
 interface Result {
   auth_token?: string;
-  error?: string;
+  errors?: string[];
 }
 
 async function login(data: Params): Promise<Result> {
   let auth_token;
-  let error;
+  let errors;
 
   try {
     const response = await axios.post("/auth/token/login/", data).then();
     auth_token = response.data.auth_token;
   } catch (err) {
-    error = err.response.data.non_field_errors[0];
+    const allErrors: string[][] = Object.values(err.response.data);
+    errors = allErrors.flat();
   }
 
-  return { auth_token, error };
+  return { auth_token, errors };
 }
 
 interface Props {
@@ -42,7 +43,7 @@ const Label = tw.label`mb-1`;
 const Login: React.FC<Props> = ({ setToken }) => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const [error, setError] = useState<string>();
+  const [errors, setErrors] = useState<string[]>();
   const history = useHistory();
 
   const mutation = useMutation(login);
@@ -57,7 +58,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
             setToken(data.auth_token);
             history.push("/");
           } else {
-            setError(data.error);
+            setErrors(data.errors);
           }
         },
       }
@@ -87,10 +88,14 @@ const Login: React.FC<Props> = ({ setToken }) => {
         />
       </FormComponent>
       <FormComponent tw="mb-0">
-        <Button type="submit">Sign in</Button>
-        {error ? (
-          <div tw="text-xs mt-1 text-center text-red-500">{error}</div>
-        ) : null}
+        <Button type="submit">Login</Button>
+        {errors
+          ? errors.map((e) => (
+              <div key={e} tw="text-xs mt-1 text-center text-red-500">
+                {e}
+              </div>
+            ))
+          : null}
       </FormComponent>
     </Form>
   );
