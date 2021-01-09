@@ -7,6 +7,7 @@ import tw from "twin.macro";
 import Event from "./components/Event";
 import Header from "./components/Header";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import useToken from "./hooks/useToken";
 
@@ -25,6 +26,9 @@ function App() {
           <Switch>
             <Route path="/login">
               <Login setToken={setToken} />
+            </Route>
+            <Route path="/signup">
+              <Signup />
             </Route>
             <ProtectedRoute
               token={token}
