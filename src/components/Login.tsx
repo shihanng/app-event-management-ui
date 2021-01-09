@@ -5,6 +5,7 @@ import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
 import tw from "twin.macro";
 import Button from "./Button";
+import Input from "./Input";
 
 interface Params {
   email?: string;
@@ -66,7 +67,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
     <Form onSubmit={handleSubmit}>
       <FormComponent>
         <label htmlFor="email">Email</label>
-        <input
+        <Input
           type="email"
           name="email"
           id="email"
@@ -76,7 +77,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
       </FormComponent>
       <FormComponent>
         <label htmlFor="password">Password</label>
-        <input
+        <Input
           type="password"
           name="password"
           id="password"
