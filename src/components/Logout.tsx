@@ -24,11 +24,11 @@ const Logout: React.FC<LogoutProps> = ({ token, setToken }) => {
     setToken("");
   };
 
-  return (
+  return token ? (
     <Button type="button" onClick={handleOnClick}>
       Logout
     </Button>
-  );
+  ) : null;
 };
 
 export default Logout;
