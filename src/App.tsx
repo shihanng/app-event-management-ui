@@ -7,6 +7,7 @@ import tw from "twin.macro";
 import Event from "./components/Event";
 import Header from "./components/Header";
 import Login from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 import useToken from "./hooks/useToken";
 
 const queryClient = new QueryClient();
@@ -22,11 +23,14 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <Header token={token} setToken={setToken}></Header>
           <Switch>
-            {token ? (
-              <Route path="/" render={() => <Event token={token} />} />
-            ) : (
+            <Route path="/login">
               <Login setToken={setToken} />
-            )}
+            </Route>
+            <ProtectedRoute
+              token={token}
+              path="/"
+              render={() => <Event token={token ? token : ""} />}
+            />
           </Switch>
         </QueryClientProvider>
       </BrowserRouter>
