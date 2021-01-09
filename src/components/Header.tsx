@@ -3,7 +3,7 @@ import React from "react";
 import tw from "twin.macro";
 import Logout, { LogoutProps } from "./Logout";
 
-const TwHeader = tw.header`flex justify-between`;
+const TwHeader = tw.header`flex justify-between mb-10`;
 const Title = tw.h1`text-2xl`;
 
 interface Props extends LogoutProps {}
