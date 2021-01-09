@@ -35,7 +35,7 @@ const EventItem: React.FC<EventItemProps> = (props) => {
       <div tw="mr-5 justify-center flex flex-col">
         <ActionButton token={token} eventUuid={uuid} />
       </div>
-      <div tw="text-sm mr-5 justify-center flex flex-col">
+      <div tw="w-44 text-sm mr-5 justify-center flex flex-col">
         <div>
           <TimeDiv>Start </TimeDiv>
           {dayjs(start_time).format("D MMM, YYYY HH:mm")}
