@@ -51,8 +51,12 @@ const Login: React.FC<Props> = ({ setToken }) => {
       { email, password },
       {
         onSuccess: (data, _variables, _context) => {
-          data.auth_token ? setToken(data.auth_token) : setError(data.error);
-          history.push("/");
+          if (data.auth_token) {
+            setToken(data.auth_token);
+            history.push("/");
+          } else {
+            setError(data.error);
+          }
         },
       }
     );
