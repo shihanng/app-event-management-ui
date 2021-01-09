@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import { Link, useHistory } from "react-router-dom";
 import tw from "twin.macro";
 import Button from "./Button";
-import { Form, FormField } from "./Form";
+import { Form, FormField, Label } from "./Form";
 import Input from "./Input";
 
 interface Params {
@@ -37,8 +37,6 @@ interface Props {
   setToken: (val: string) => void;
 }
 
-const Label = tw.label`mb-1`;
-
 const Login: React.FC<Props> = ({ setToken }) => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -64,8 +62,10 @@ const Login: React.FC<Props> = ({ setToken }) => {
     );
   };
 
+  const Div = tw.div`flex flex-col mt-10 w-80 mx-auto`;
+
   return (
-    <div tw="flex flex-col mt-10 w-80 mx-auto ">
+    <Div>
       <Form onSubmit={handleSubmit}>
         <FormField>
           <Label htmlFor="email">Email</Label>
@@ -101,7 +101,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
       <div tw="mt-5 text-sm text-center p-4 rounded-lg border border-gray-300">
         Don't have an account? <Link to="/signup">Sign up here.</Link>
       </div>
-    </div>
+    </Div>
   );
 };
 
