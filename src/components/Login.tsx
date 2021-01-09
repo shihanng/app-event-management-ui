@@ -5,7 +5,9 @@ import { useMutation } from "react-query";
 import { Link, useHistory } from "react-router-dom";
 import tw from "twin.macro";
 import Button from "./Button";
+import { Form, FormField } from "./Form";
 import Input from "./Input";
+
 interface Params {
   email?: string;
   password?: string;
@@ -35,8 +37,6 @@ interface Props {
   setToken: (val: string) => void;
 }
 
-const Form = tw.form`bg-gray-100 p-5 rounded-lg border border-gray-300 flex flex-col`;
-const FormComponent = tw.div`flex flex-col mb-5`;
 const Label = tw.label`mb-1`;
 
 const Login: React.FC<Props> = ({ setToken }) => {
@@ -67,7 +67,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
   return (
     <div tw="flex flex-col mt-10 w-80 mx-auto ">
       <Form onSubmit={handleSubmit}>
-        <FormComponent>
+        <FormField>
           <Label htmlFor="email">Email</Label>
           <Input
             type="email"
@@ -76,8 +76,8 @@ const Login: React.FC<Props> = ({ setToken }) => {
             required
             onChange={(e) => setEmail(e.target.value)}
           />
-        </FormComponent>
-        <FormComponent>
+        </FormField>
+        <FormField>
           <Label htmlFor="password">Password</Label>
           <Input
             type="password"
@@ -86,8 +86,8 @@ const Login: React.FC<Props> = ({ setToken }) => {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
-        </FormComponent>
-        <FormComponent tw="mb-0">
+        </FormField>
+        <FormField tw="mb-0">
           <Button type="submit">Login</Button>
           {errors
             ? errors.map((e) => (
@@ -96,7 +96,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
                 </div>
               ))
             : null}
-        </FormComponent>
+        </FormField>
       </Form>
       <div tw="mt-5 text-sm text-center p-4 rounded-lg border border-gray-300">
         Don't have an account? <Link to="/signup">Sign up here.</Link>
