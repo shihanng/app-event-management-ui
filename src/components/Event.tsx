@@ -4,25 +4,36 @@ import dayjs from "dayjs";
 import React from "react";
 import { useQuery } from "react-query";
 import tw from "twin.macro";
+import { Deregister, Register } from "./Register";
 
 interface Props {
   token: string;
 }
 
-interface EventItemProps extends EventResponse {
+interface EventItemProps extends EventResponse, Props {
   isRegistered: boolean;
 }
 
 const EventItem: React.FC<EventItemProps> = (props) => {
-  const { location, name, start_time, end_time, isRegistered } = props;
+  const {
+    uuid,
+    token,
+    location,
+    name,
+    start_time,
+    end_time,
+    isRegistered,
+  } = props;
 
   const Div = tw.div`mb-3 flex flex-row`;
   const TimeDiv = tw.div`w-9 font-thin text-sm inline-block`;
 
+  const ActionButton = isRegistered ? Deregister : Register;
+
   return (
     <Div>
-      <div tw="w-16 text-sm mr-5 justify-center flex flex-col">
-        {isRegistered ? "Unregister" : "Register"}
+      <div tw="mr-5 justify-center flex flex-col">
+        <ActionButton token={token} eventUuid={uuid} />
       </div>
       <div tw="text-sm mr-5 justify-center flex flex-col">
         <div>
@@ -87,7 +98,11 @@ const Event: React.FC<Props> = ({ token }) => {
       {dataEvents.map((d) => {
         return (
           <div key={d.uuid}>
-            <EventItem isRegistered={dataUserEvents.includes(d.uuid)} {...d} />
+            <EventItem
+              token={token}
+              isRegistered={dataUserEvents.includes(d.uuid)}
+              {...d}
+            />
           </div>
         );
       })}
