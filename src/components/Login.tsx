@@ -37,6 +37,8 @@ interface Props {
   setToken: (val: string) => void;
 }
 
+const Div = tw.div`flex flex-col mt-10 w-80 mx-auto`;
+
 const Login: React.FC<Props> = ({ setToken }) => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -61,8 +63,6 @@ const Login: React.FC<Props> = ({ setToken }) => {
       }
     );
   };
-
-  const Div = tw.div`flex flex-col mt-10 w-80 mx-auto`;
 
   return (
     <Div>
