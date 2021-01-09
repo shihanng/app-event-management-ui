@@ -84,9 +84,11 @@ const Login: React.FC<Props> = ({ setToken }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormComponent>
-      {error ? <div>{error}</div> : null}
       <FormComponent tw="mb-0">
         <Button type="submit">Sign in</Button>
+        {error ? (
+          <div tw="text-xs mt-1 text-center text-red-500">{error}</div>
+        ) : null}
       </FormComponent>
     </Form>
   );
