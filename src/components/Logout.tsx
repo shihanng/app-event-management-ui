@@ -3,12 +3,12 @@ import React from "react";
 import { useMutation } from "react-query";
 import Button from "./Button";
 
-interface Props {
+export interface LogoutProps {
   setToken: (val: string) => void;
   token: string | null;
 }
 
-const Logout: React.FC<Props> = ({ token, setToken }) => {
+const Logout: React.FC<LogoutProps> = ({ token, setToken }) => {
   const mutation = useMutation(() =>
     axios.post(
       "/auth/token/logout",
