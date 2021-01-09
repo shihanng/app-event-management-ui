@@ -2,7 +2,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import tw from "twin.macro";
 import Button from "./Button";
 import Input from "./Input";
@@ -29,7 +29,7 @@ async function signup(data: Params): Promise<Result> {
   return { errors };
 }
 
-const Form = tw.form`mt-10 w-80 mx-auto bg-gray-100 p-5 rounded-lg border border-gray-300 flex flex-col`;
+const Form = tw.form`bg-gray-100 p-5 rounded-lg border border-gray-300 flex flex-col`;
 const FormComponent = tw.div`flex flex-col mb-5`;
 const Label = tw.label`mb-1`;
 
@@ -65,48 +65,53 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormComponent>
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          required
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </FormComponent>
-      <FormComponent>
-        <Label htmlFor="password">Password</Label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </FormComponent>
-      <FormComponent>
-        <Label htmlFor="confirm_password">Confirm password</Label>
-        <Input
-          type="password"
-          name="confirm_password"
-          id="confirm_password"
-          required
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-      </FormComponent>
-      <FormComponent tw="mb-0">
-        <Button type="submit">Sign up</Button>
-        {errors
-          ? errors.map((e) => (
-              <div key={e} tw="text-xs mt-1 text-center text-red-500">
-                {e}
-              </div>
-            ))
-          : null}
-      </FormComponent>
-    </Form>
+    <div tw="flex flex-col mt-10 w-80 mx-auto ">
+      <Form onSubmit={handleSubmit}>
+        <FormComponent>
+          <Label htmlFor="email">Email</Label>
+          <Input
+            type="email"
+            name="email"
+            id="email"
+            required
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </FormComponent>
+        <FormComponent>
+          <Label htmlFor="password">Password</Label>
+          <Input
+            type="password"
+            name="password"
+            id="password"
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FormComponent>
+        <FormComponent>
+          <Label htmlFor="confirm_password">Confirm password</Label>
+          <Input
+            type="password"
+            name="confirm_password"
+            id="confirm_password"
+            required
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </FormComponent>
+        <FormComponent tw="mb-0">
+          <Button type="submit">Sign up</Button>
+          {errors
+            ? errors.map((e) => (
+                <div key={e} tw="text-xs mt-1 text-center text-red-500">
+                  {e}
+                </div>
+              ))
+            : null}
+        </FormComponent>
+      </Form>
+      <div tw="mt-5 text-sm text-center p-4 rounded-lg border border-gray-300">
+        Already have an account? <Link to="/login">Login here.</Link>
+      </div>
+    </div>
   );
 };
 
