@@ -37,6 +37,7 @@ interface Props {
 
 const Form = tw.form`mt-10 w-80 mx-auto bg-gray-100 p-5 rounded-lg border border-gray-300 flex flex-col`;
 const FormComponent = tw.div`flex flex-col mb-5`;
+const Label = tw.label`mb-1`;
 
 const Login: React.FC<Props> = ({ setToken }) => {
   const [email, setEmail] = useState<string>();
@@ -66,7 +67,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <FormComponent>
-        <label htmlFor="email">Email</label>
+        <Label htmlFor="email">Email</Label>
         <Input
           type="email"
           name="email"
@@ -76,7 +77,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
         />
       </FormComponent>
       <FormComponent>
-        <label htmlFor="password">Password</label>
+        <Label htmlFor="password">Password</Label>
         <Input
           type="password"
           name="password"
