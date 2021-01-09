@@ -1,7 +1,9 @@
+/** @jsxImportSource @emotion/react */
 import axios from "axios";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router-dom";
+import tw from "twin.macro";
 import Button from "./Button";
 
 interface Params {
@@ -32,6 +34,9 @@ interface Props {
   setToken: (val: string) => void;
 }
 
+const Form = tw.form`mt-10 w-80 mx-auto bg-gray-100 p-5 rounded-lg border border-gray-300 flex flex-col`;
+const FormComponent = tw.div`flex flex-col mb-5`;
+
 const Login: React.FC<Props> = ({ setToken }) => {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
@@ -54,8 +59,8 @@ const Login: React.FC<Props> = ({ setToken }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <Form onSubmit={handleSubmit}>
+      <FormComponent>
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -64,8 +69,8 @@ const Login: React.FC<Props> = ({ setToken }) => {
           required
           onChange={(e) => setEmail(e.target.value)}
         />
-      </div>
-      <div>
+      </FormComponent>
+      <FormComponent>
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -74,10 +79,12 @@ const Login: React.FC<Props> = ({ setToken }) => {
           required
           onChange={(e) => setPassword(e.target.value)}
         />
-      </div>
+      </FormComponent>
       {error ? <div>{error}</div> : null}
-      <Button type="submit">Sign In</Button>
-    </form>
+      <FormComponent tw="mb-0">
+        <Button type="submit">Sign in</Button>
+      </FormComponent>
+    </Form>
   );
 };
 
