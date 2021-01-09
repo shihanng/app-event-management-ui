@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import axios from "axios";
+import dayjs from "dayjs";
 import React from "react";
 import { useQuery } from "react-query";
 import tw from "twin.macro";
@@ -27,11 +28,11 @@ const EventItem: React.FC<EventItemProps> = (props) => {
       <div tw="text-sm mr-5 justify-center flex flex-col">
         <div>
           <TimeDiv>Start </TimeDiv>
-          {start_time}
+          {dayjs(start_time).format("D MMM, YYYY HH:mm")}
         </div>
         <div>
           <TimeDiv>End </TimeDiv>
-          {end_time}
+          {dayjs(end_time).format("D MMM, YYYY HH:mm")}
         </div>
       </div>
       <div>
