@@ -46,7 +46,7 @@ const Action: React.FC<ActionProps> = ({ actionType, registerProps }) => {
 
   const SmallButton = tw(Button)`text-xs w-24`;
   const RegisterButton =
-    actionType == "register"
+    actionType === "register"
       ? tw(SmallButton)`bg-green-400 hover:bg-green-800`
       : tw(SmallButton)`bg-red-400 hover:bg-red-800`;
 
