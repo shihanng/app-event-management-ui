@@ -5,6 +5,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import tw from "twin.macro";
 import AddEvent from "./AddEvent";
+import RemoveEvent from "./RemoveEvent";
 import { Deregister, Register } from "./Register";
 
 interface Props {
@@ -46,11 +47,12 @@ const EventItem: React.FC<EventItemProps> = (props) => {
           {dayjs(end_time).format("D MMM, YYYY HH:mm")}
         </div>
       </div>
-      <div>
+      <div tw="flex-grow">
         <div tw="font-semibold">{name}</div>
         <div tw="font-thin inline">Location: </div>
         <div tw="inline">{location}</div>
       </div>
+      <RemoveEvent token={token} eventUuid={uuid} />
     </Div>
   );
 };
