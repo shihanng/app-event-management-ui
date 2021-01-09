@@ -6,14 +6,14 @@ interface Props {
   token: string;
 }
 
-interface Event {
+interface EventItem {
   name: string;
   uuid: string;
   location: string;
 }
 
 interface Data {
-  events: Event[];
+  events: EventItem[];
 }
 
 function listEvent(token: string) {
@@ -23,7 +23,7 @@ function listEvent(token: string) {
 
   return async function (): Promise<Data> {
     const response = await axios.get("/events/", config);
-    const events: Event[] = response.data.map((e: Event) => e);
+    const events: EventItem[] = response.data.map((e: EventItem) => e);
     return { events };
   };
 }
