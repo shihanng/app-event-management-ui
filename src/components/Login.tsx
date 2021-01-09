@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import Button from "./Button";
 
 interface Params {
   email?: string;
@@ -72,7 +73,7 @@ const Login: React.FC<Props> = ({ setToken }) => {
         />
       </div>
       {error ? <div>{error}</div> : null}
-      <button type="submit">Sign In</button>
+      <Button type="submit">Sign In</Button>
     </form>
   );
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useMutation } from "react-query";
+import Button from "./Button";
 
 interface Props {
   setToken: (val: string) => void;
@@ -24,9 +25,9 @@ const Logout: React.FC<Props> = ({ token, setToken }) => {
   };
 
   return (
-    <button type="button" onClick={handleOnClick}>
+    <Button type="button" onClick={handleOnClick}>
       Logout
-    </button>
+    </Button>
   );
 };
 
