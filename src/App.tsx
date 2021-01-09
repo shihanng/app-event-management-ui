@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import tw from "twin.macro";
 import Event from "./components/Event";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import useToken from "./hooks/useToken";
 
 const queryClient = new QueryClient();
@@ -19,6 +20,7 @@ function App() {
     <Div>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
+          <Logout token={token} setToken={setToken} />
           <Switch>
             {token ? (
               <Route path="/" render={() => <Event token={token} />} />
